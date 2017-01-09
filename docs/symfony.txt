@@ -1,0 +1,46 @@
+
+1. Install symfony installer:
+php -r "readfile('https://symfony.com/installer');" > symfony
+
+2. Install new symfony project:
+symfony new my_project_name
+symfony new my_project_name 2.8
+symfony new my_project_name 3.2
+
+Or
+
+1. Install composer:
+How to install and working with composer read in 'composer.txt' file.
+
+2. Install new symfony project using composer:
+composer create-project symfony/framework-standard-edition my_project_name
+composer create-project symfony/framework-standard-edition my_project_name "2.8.*"
+
+3. Run symfony application:
+
+// Move to project directory
+cd my_project_name/
+
+// Start project
+php bin/console server:run
+php bin/console server:run localhost:8000
+
+// or Start project using PHP web server
+cd web/
+php -S localhost:9090
+
+4. Check symfony configuration:
+http://localhost:8000/config.php
+
+// or If you are using PHP web server
+http://localhost:9090/config.php
+
+5. Update symfony packages:
+
+// run it in project folder
+composer update
+
+6. Check symfony security for vulnerability:
+php app/console security:check
+// or
+php bin/console security:check
