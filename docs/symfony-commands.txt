@@ -1,0 +1,31 @@
+
+Notice:
+For symfony > 2.8 - using bin/console
+For symfony <= 2.8 - using app/console
+
+1. Run project:
+php app/console server:run localhost:8000
+
+2. Check security issues:
+php app/console security:check
+
+3. Clear cache:
+php app/console cache:clear
+php app/console cache:clear --env=prod --no-debug
+
+4. Install assets:
+php app/console assets:install web --symlink
+php app/consoel assets:install
+
+5. Install assetic data:
+php app/console assetic:dump
+php app/console assetic:dump --env=prod --no-debug
+
+6. Show all routes in project:
+php app/console router:debug
+
+7. Show help for a command:
+php app/console help
+
+8. Show lists commands:
+php app/console list
