@@ -45,3 +45,9 @@ php app/console doctrine:database:import
 
 12. Create database schema:
 php app/console doctrine:schema:create
+
+13. Validate doctrine mapping:
+php app/console doctrine:schema:validate
+
+14. Check doctrine for production:
+php app/console doctrine:ensure-production-settings
