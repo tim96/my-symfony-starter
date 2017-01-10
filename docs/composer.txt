@@ -13,3 +13,10 @@ php composer.phar update
 
 4. Install some package and add it to composer.json:
 php composer.phar require --dev doctrine/data-fixtures
+
+5. Optimize autoload:
+php composer.phar dump-autoload --optimize
+
+6. If you want to install a lot of plugins, sometimes you will have a memory error.
+# Run composer with unlimited memory limit:
+php -d memory_limit=-1 composer.phar update
