@@ -29,3 +29,19 @@ php app/console help
 
 8. Show lists commands:
 php app/console list
+
+The most popular commands:
+
+9. Update database schema using doctrine migration:
+# Before run migration you must think about rollback script and downgrade migration.
+# --dump-sql - show result queries. You can save it to additional file.
+php app/console doctrine:schema:update --force --dump-sql
+
+10. Create database:
+php app/console doctrine:database:create
+
+11. Import sql file:
+php app/console doctrine:database:import
+
+12. Create database schema:
+php app/console doctrine:schema:create
