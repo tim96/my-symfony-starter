@@ -12,6 +12,7 @@ php composer.phar self-update
 php composer.phar update
 
 4. Install some package and add it to composer.json:
+# --dev - this option allow to save package in 'require-dev' item in composer.json
 php composer.phar require --dev doctrine/data-fixtures
 
 5. Optimize autoload:
