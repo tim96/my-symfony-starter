@@ -19,6 +19,9 @@ class AppKernel extends Kernel
 
             // Custom Bundles
             new AppBundle\AppBundle(),
+
+            // Create backup
+            // new Dizda\CloudBackupBundle\DizdaCloudBackupBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
