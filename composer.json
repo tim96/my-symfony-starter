@@ -27,7 +27,8 @@
         "symfony/phpunit-bridge": "~2.7",
         "doctrine/data-fixtures": "^1.1",
         "hautelook/alice-bundle": "^0.2.0",
-        "doctrine/doctrine-fixtures-bundle": "^2.3"
+        "doctrine/doctrine-fixtures-bundle": "^2.3",
+        "nelmio/alice": "^1.7"
     },
     "scripts": {
         "symfony-scripts": [

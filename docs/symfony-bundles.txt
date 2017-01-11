@@ -13,3 +13,22 @@ php composer.phar require --dev doctrine/doctrine-fixtures-bundle
 # Several commands
 php app/console doctrine:fixtures:load
 php app/console doctrine:fixtures:load --append
+
+
+2. AliceBundle
+
+Alice - Expressive fixtures generator
+
+Relying on fzaninotto/Faker, Alice allows you to create a ton of fixtures/fake data for use while developing or testing
+your project. It gives you a few essential tools to make it very easy to generate complex data with constraints in a
+readable and easy to edit way, so that everyone on your team can tweak the fixtures if needed.
+
+# How to install
+php composer.phar require --dev hautelook/alice-bundle
+php composer.phar require --dev nelmio/alice
+
+# Several commands
+# --append - Use this flag to append data instead of deleting data before loading it (deleting first is the default behavior);
+php app/console h:d:f:l
+php app/console hautelook_alice:doctrine:fixtures:load
+php app/console hautelook_alice:doctrine:fixtures:load --bundle=Name_Bundle --append
