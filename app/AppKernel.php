@@ -22,6 +22,9 @@ class AppKernel extends Kernel
 
             // Create backup
             // new Dizda\CloudBackupBundle\DizdaCloudBackupBundle(),
+
+            // Create/Work wit menu
+            // new Knp\Bundle\MenuBundle\KnpMenuBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

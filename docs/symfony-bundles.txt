@@ -43,3 +43,35 @@ php composer.phar require dizda/cloud-backup-bundle
 
 # Several commands
 php app/console dizda:backup:start --env=prod
+
+4. KnpMenuBundle
+
+The KnpMenuBundle integrates the KnpMenu PHP library with Symfony. This means easy-to-implement and feature-rich menus in your Symfony application!
+
+# How to install
+php composer.phar require knplabs/knp-menu-bundle
+
+5. StofDoctrineExtensionsBundle
+
+This bundle provides integration for DoctrineExtensions in your Symfony2 Project.
+DoctrineExtensions - (Doctrine2 behavioral extensions)
+Doctrine2 behavioral extensions, Translatable, Sluggable, Tree-NestedSet, Timestampable, Loggable, Sortable
+
+Tree - this extension automates the tree handling process and adds some tree specific functions on repository. (closure, nestedset or materialized path)
+Translatable - gives you a very handy solution for translating records into different languages. Easy to setup, easier to use.
+Sluggable - urlizes your specified fields into single unique slug
+Timestampable - updates date fields on create, update and even property change.
+Blameable - updates string or reference fields on create, update and even property change with a string or object (e.g. user).
+Loggable - helps tracking changes and history of objects, also supports version management.
+Sortable - makes any document or entity sortable
+Translator - explicit way to handle translations
+SoftDeleteable - allows to implicitly remove records
+Uploadable - provides file upload handling in entity fields
+References - supports linking Entities in Documents and vice versa
+ReferenceIntegrity - constrains ODM MongoDB Document references
+IpTraceable - inherited from Timestampable, sets IP address instead of timestamp
+
+Currently these extensions support Yaml, Annotation and Xml mapping.
+
+# How to install
+php composer.phar require stof/doctrine-extensions-bundle
