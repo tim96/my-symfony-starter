@@ -87,3 +87,12 @@ This bundle contains support for 58 different providers.
 
 # How to install
 php composer.phar require hwi/oauth-bundle
+
+
+7. NelmioApiDocBundle
+
+Generates documentation for your REST API from annotations.
+The NelmioApiDocBundle bundle allows you to generate a decent documentation for your APIs.
+
+# How to install
+php composer.phar require nelmio/api-doc-bundle

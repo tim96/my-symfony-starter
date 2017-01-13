@@ -24,7 +24,8 @@
         "dizda/cloud-backup-bundle": "^3.3",
         "knplabs/knp-menu-bundle": "^2.1",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "hwi/oauth-bundle": "^0.5.3"
+        "hwi/oauth-bundle": "^0.5.3",
+        "nelmio/api-doc-bundle": "^2.13"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
