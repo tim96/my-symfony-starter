@@ -23,7 +23,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "dizda/cloud-backup-bundle": "^3.3",
         "knplabs/knp-menu-bundle": "^2.1",
-        "stof/doctrine-extensions-bundle": "^1.2"
+        "stof/doctrine-extensions-bundle": "^1.2",
+        "hwi/oauth-bundle": "^0.5.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

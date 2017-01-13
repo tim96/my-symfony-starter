@@ -44,12 +44,14 @@ php composer.phar require dizda/cloud-backup-bundle
 # Several commands
 php app/console dizda:backup:start --env=prod
 
+
 4. KnpMenuBundle
 
 The KnpMenuBundle integrates the KnpMenu PHP library with Symfony. This means easy-to-implement and feature-rich menus in your Symfony application!
 
 # How to install
 php composer.phar require knplabs/knp-menu-bundle
+
 
 5. StofDoctrineExtensionsBundle
 
@@ -75,3 +77,13 @@ Currently these extensions support Yaml, Annotation and Xml mapping.
 
 # How to install
 php composer.phar require stof/doctrine-extensions-bundle
+
+
+6. HWIOAuthBundle
+
+OAuth client integration for Symfony. Supports both OAuth1.0a and OAuth2.
+The HWIOAuthBundle adds support for authenticating users via OAuth1.0a or OAuth2 in Symfony2.
+This bundle contains support for 58 different providers.
+
+# How to install
+php composer.phar require hwi/oauth-bundle
