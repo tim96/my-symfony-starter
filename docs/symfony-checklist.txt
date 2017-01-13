@@ -1,0 +1,65 @@
+
+1. Check a PHP Accelerator
+
+Symfony2 is a flexible and powerful framework... that ends to a quite slow execution time. Of course,
+the prod environment is much faster than you usual dev environment, but that's not enough.
+In order to boost your application in production, it is very recommended to install a PHP Accelerator like APC.
+
+2. Ensure real secret
+
+Ensure that your production server is using a customized secret key. Check it in your app/config/parameters.yml file:
+secret:  please_use_a_real_secret_here
+Symfony2 Form Component automatically embeds and validate CSRF tokens for you.
+
+3. Use custom Favicon
+
+You don't want the Symfony logo to appear in your visitors' browser. That's why you must replace the default favicon
+with your own before deployment.
+You can use some services to generate all favicons: for browser, for iphones and etc.: http://www.favicon-generator.org/
+
+4. Configure monolog
+
+The component generating the logs of your application is essential for managing your web platform.
+Symfony2 ships Monolog component dedicated to this task.
+The default configuration is OK for the development environment, but it isn't enough for production.
+The changes to do deal with two aims:
+    Send errors to the website administrator by email (logs of "error" level);
+    Record all authentications, as these are logs of "info" level, that are not logged by default.
+
+5. Use Doctrine Cache
+
+In production environment, it is highly recommended to use Doctrine cache.
+There are two types of cache:
+    1) Query and Metadata Cache
+    2) Result Cache
+The Query Cache aims at caching the transformation of a DQL query to its SQL counterpart. In production,
+your requests won't change a bit so why not caching them.
+The Metadata Cache aims at caching the parsed metadata from a few different sources like YAML, XML, Annotations, etc.
+
+The result of your queries can be cached in order not to query the database again and again.
+As this is a finer tuning, you can't parameter it application-wide.
+
+6. Optimize the Autoloader
+
+By default, Composer dumps an autoloader that isn't fully optimized. Indeed, when you have many classes,
+the autoloader can take up a substantial time..
+In production environment, you want the autoloader to be fast. Composer can dump an optimized autoloader that
+converts PSR-0 packages into classmap ones, which improves performance.
+To use the optimized autoloader, just add the --optimize option to the dump-autoload Composer command:
+php composer.phar dump-autoload --optimize
+
+7. Customize error pages
+
+If you are used to the error pages of the "dev" environment, it is hopefully not the case of your future visitors on
+your production website. So, you must customize the different error pages, in order to integrate them with your own layout.
+
+Hopefully, customizing error pages is really easy. Their views are located in the TwigBundle bundle, that gives you
+the key to override them by yours. The views you have to create are: Exception/errorXXX.html.twig, where XXX is the
+number of the encountered error. It is highly recommended to customize at least errors 404 and 500.
+
+To use your own views, there are two possible solutions:
+    You can create a new bundle, that extends TwigBundle, and put your views in the directory
+    Resources/views/Exception/errorXXX.html.twig. That enable you to reuse them in different projects as it is a reusable bundle;
+
+    You can also simply put your views in the directory app/Resources/TwigBundle/views/Exception/errorXXX.html.twig.
+    If your views are specific to the current project, it avoid you to create a new bundle just for that.
