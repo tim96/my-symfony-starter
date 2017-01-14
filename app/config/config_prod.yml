@@ -23,5 +23,12 @@ monolog:
             type:  stream
             path:  "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
+        # Rotate your Log Files
+        rotating_file:
+            type:  rotating_file
+            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+        # One best-practice solution is to use a tool like the logrotate Linux command
+        # to rotate log files before they become too large.
         console:
             type:  console
