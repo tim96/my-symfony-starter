@@ -96,3 +96,23 @@ The NelmioApiDocBundle bundle allows you to generate a decent documentation for 
 
 # How to install
 php composer.phar require nelmio/api-doc-bundle
+
+
+8. KnpPaginatorBundle
+
+SEO friendly Symfony2 paginator to sort and paginate
+Generally this bundle is based on Knp Pager component. This component introduces a different way for pagination handling.
+
+# How to install
+php composer.phar require knplabs/knp-paginator-bundle
+
+
+9. DoctrineExtensions
+
+A set of Doctrine 2 extensions.
+A set of extensions to Doctrine 2 that add support for additional query functions available in MySQL, Oracle, Sqlite and PostgreSQL.
+For example:
+MySQL - ACOS, ASCII, ASIN, ATAN, ATAN2, BINARY, BIT_COUNT, BIT_XOR, CEIL, CHAR_LENGTH, CONCAT_WS and etc.
+
+# How to install
+php composer.phar require beberlei/DoctrineExtensions
