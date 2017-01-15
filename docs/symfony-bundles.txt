@@ -116,3 +116,17 @@ MySQL - ACOS, ASCII, ASIN, ATAN, ATAN2, BINARY, BIT_COUNT, BIT_XOR, CEIL, CHAR_L
 
 # How to install
 php composer.phar require beberlei/DoctrineExtensions
+
+
+10. FOSRestBundle
+
+This Bundle provides various tools to rapidly develop RESTful API's with Symfony
+This bundle provides various tools to rapidly develop RESTful API's & applications with Symfony. Features include:
+    A View layer to enable output and format agnostic Controllers
+    A custom route loader to generate url's following REST conventions
+    Accept header format negotiation including handling for custom mime types
+    RESTful decoding of HTTP request body and Accept headers
+    Exception controller for sending appropriate HTTP status codes
+
+# How to install
+php composer.phar require friendsofsymfony/rest-bundle
