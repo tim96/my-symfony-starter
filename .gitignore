@@ -48,3 +48,4 @@
 */Entity/*~
 composer.lock
 .idea/
+node_modules/
