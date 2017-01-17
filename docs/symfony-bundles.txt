@@ -130,3 +130,28 @@ This bundle provides various tools to rapidly develop RESTful API's & applicatio
 
 # How to install
 php composer.phar require friendsofsymfony/rest-bundle
+
+
+11. LiipImagineBundle
+
+Symfony Bundle to assist in imagine manipulation using the imagine library
+This bundle provides an image manipulation abstraction toolkit for Symfony-based projects.
+
+Overview:
+Filter Sets: Using any Symfony-supported configuration language (such as YML and XML), you can create filter set
+definitions that specify transformation routines. These include a set of filters and post-processors, as well as other, optional parameters.
+Filters: Many built-in filters are provided, allowing the application of common transformations. Examples include
+thumbnail, scale, crop, strip, watermark, and many more. Additionally, custom filters are supported.
+Post-Processors: This component allows for the modification of the resulting binary file created by filters.
+Examples include jpegoptim, optipng, cjpeg, and pngquant. Additionally, custom post-processors are supported.
+
+# How to install
+php composer.phar require liip/imagine-bundle
+
+
+12. SonataAdminBundle
+
+AdminBundle - The missing Symfony2 Admin Generator
+
+# How to install
+php composer.phar require sonata-project/admin-bundle
