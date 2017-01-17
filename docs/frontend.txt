@@ -1,0 +1,22 @@
+
+1. Install npm manager and etc.
+
+2. Init new project:
+npm init
+
+3. Install gulp and save it to project.json file:
+# npm install gulp --save
+npm install gulp --save-dev
+
+4. Install another packages:
+npm install autoprefixer --save-dev
+npm install browser-sync --save-dev
+npm install gulp-less --save-dev
+npm install gulp-plumber --save-dev
+npm install gulp-uglify --save-dev
+npm install gulp-uglifycss --save-dev
+
+5. Add gulpfile.js
+
+6. Build styles:
+gulp style
