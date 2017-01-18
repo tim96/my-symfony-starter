@@ -155,3 +155,33 @@ AdminBundle - The missing Symfony2 Admin Generator
 
 # How to install
 php composer.phar require sonata-project/admin-bundle
+
+
+13. SncRedisBundle
+
+A Redis bundle for Symfony2 supporting Predis and PhpRedis.
+This bundle integrates Predis and phpredis into your Symfony application.
+
+# How to install
+php composer.phar require snc/redis-bundle
+
+
+14. KnpSnappyBundle
+
+Easily create PDF and images in Symfony2 by converting html using webkit.
+Snappy is a PHP (5.3+) wrapper for the wkhtmltopdf conversion utility.
+It allows you to generate either pdf or image files from your html documents, using the webkit engine.
+The KnpSnappyBundle provides a simple integration for your Symfony project.
+
+# How to install
+php composer.phar require knplabs/knp-snappy-bundle
+
+
+15. MpdfPortBundle
+
+MpdfBundle is a wrapper service which allows to use mPDF class in your Symfony project. The main benefit of
+MpdfPortbundle is a possibility to generate PDF documents in Symfony without installation of external converters on
+a server machine.
+
+# How to install
+php composer.phar require tfox/mpdf-port-bundle
