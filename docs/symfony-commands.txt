@@ -51,3 +51,6 @@ php app/console doctrine:schema:validate
 
 14. Check doctrine for production:
 php app/console doctrine:ensure-production-settings
+
+15. Generate bundle:
+php app/console generate:bundle
