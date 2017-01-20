@@ -185,3 +185,11 @@ a server machine.
 
 # How to install
 php composer.phar require tfox/mpdf-port-bundle
+
+
+16. GenemuFormBundle
+
+Extra Form : Captcha GD, Tinymce, Recaptcha, JQueryDate, JQueryAutocomplete, JQuerySlider, JQueryFile, JQueryImage
+
+# How to install
+php composer.phar require genemu/form-bundle
