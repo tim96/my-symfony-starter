@@ -1,0 +1,40 @@
+
+1. mc
+
+GNU Midnight Commander (also known as mc, the command used to start it) is a free cross-platform orthodox file manager.
+
+
+2. htop
+
+htop is an interactive system-monitor process-viewer. It is designed as an alternative to the Unix program top.
+It shows a frequently updated list of the processes running on a computer, normally ordered by the amount of CPU usage.
+Unlike top, htop provides a full list of processes running, instead of the top resource-consuming processes.
+Htop uses color and gives visual information about processor, swap and memory status.
+
+
+3. putty
+
+PuTTY is a free and open-source terminal emulator, serial console and network file transfer application.
+It supports several network protocols, including SCP, SSH, Telnet, rlogin, and raw socket connection.
+It can also connect to a serial port.
+
+
+4. flock
+
+Block program from running twice simultaneously. Very helpful for symfony commands(with LockHandler).
+This utility manages flock(2) locks from within shell scripts or the command line.
+link: http://www.unix.com/man-page/linux/1/flock/
+
+
+5. runalarm
+
+Limit the running time of a process.
+Cronutils is a set of tools to assist the reliable running of periodic and batch jobs.
+link: https://github.com/google/cronutils
+
+
+6. nano
+
+GNU nano is a text editor for Unix-like computing systems or operating environments using a command line interface.
+It emulates the Pico text editor, part of the Pine email client, and also provides additional functionality.
+
