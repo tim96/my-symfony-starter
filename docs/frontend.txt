@@ -15,8 +15,20 @@ npm install gulp-less --save-dev
 npm install gulp-plumber --save-dev
 npm install gulp-uglify --save-dev
 npm install gulp-uglifycss --save-dev
+npm install gulp-if --save-dev
+npm install gulp-concat --save-dev
+npm install gulp-sourcemaps --save-dev
+npm install bower --save
+
+bower install jquery bootstrap fontawesome
 
 5. Add gulpfile.js
 
 6. Build styles:
 gulp style
+
+7. Run gulp scripts
+gulp
+
+8. Update scripts using bower:
+bower update
