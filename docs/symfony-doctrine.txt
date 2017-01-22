@@ -1,0 +1,357 @@
+1. Avoid Object Hydration when handling many entities. We can using HydrateArray instead of HydrateObject. Using arrays:
+$arrayResults  = $qb->getQuery()->getArrayResult();
+$scalarResults = $qb->getQuery()->getScalarResult();
+
+2. Don’t load the whole entity if you only need reference to it:
+$user->addFriend($em->getReference('MyUserBundle\Entity\User', $friendId));
+
+3. Update multiple database rows using Update statement:
+$qb->update('MyUserBundle:User', 'u')
+    ->set('u.friend', $friendId)
+    ->getQuery()->execute();
+
+4. Use the advantages of Lazy Collections
+/**
+ * @ManyToMany(targetEntity="CmsUser", mappedBy="groups", fetch="EXTRA_LAZY")
+ */
+public $users;
+
+In that case, for example method $users->count() won’t load the whole collection from the database to the memory.
+
+5. Beware of loading entities in a loop. Using 'join' to load all relatied data using one query. Using 'join' and 'select'.
+
+6. Using 'Symfony Profiler Toolbar'.
+
+8. Partial. We get only need fields: $qb->select('partial b.{id, priceTax}');
+
+
+Instead of using simple foreach:
+$records = $bookRepository->getList()->getQuery()->getResult();
+
+/** @var Book $record */
+foreach ($records as $record) {
+    $record->setPriceTax($record->getPrice() + $this->getTaxForBook($record->getId()));
+    $record->setUpdatedAt(new \DateTime());
+}
+
+$em->flush();
+
+You can use:
+$connection = $em->getConnection();
+// disable SQLLogger
+$connection->getConfiguration()->setSQLLogger(null);
+
+$records = $bookRepository->getList()->getQuery();
+
+$connection->beginTransaction();
+
+$tableName = $em->getClassMetadata('TimExampleBundle:Book')->getTableName();
+$date = new \DateTime();
+
+/** @var Book[] $record */
+foreach ($records->iterate() as $record) {
+
+    $connection->update(
+        $tableName,
+        array(
+            'price_tax' => $record[0]->getPrice() + $this->getTaxForBook($record[0]->getId()),
+            'updated_at' => $date->format('Y-m-d H:i:s'),
+        ),
+        array('id' => $record[0]->getId())
+    );
+
+    $em->detach($record[0]);
+}
+
+$connection->commit();
+
+The first solution results on books table with 45 megabytes data:
+~ 30 seconds
+~ 170 MB
+The optimize solution results on the same table:
+~ 18 seconds
+~ 24 MB
+
+As you can see we decrease memory in 7 times, and increase speed almost in 2 times.
+
+
+// First working solution using doctrine hydrate
+$query = 'Select a.*, i.*
+  From project_album as a
+  Left JOIN
+  (
+    Select i.*
+    From project_image as i
+    Where (
+      Select COUNT(*)
+      From project_image as i1
+      Where i1.id <= i.id AND i1.album_id = i.album_id
+    )
+    <= (?)
+  ) as i ON a.id = i.album_id
+  WHERE a.id = (?)'
+;
+
+// retrive data as simple array
+$em = $this->getEntityManager();
+$stmt = $em->getConnection()->prepare($query);
+$stmt->bindValue(1, (int)$maxImages);
+$stmt->bindValue(2, (int)$id);
+$stmt->execute();
+
+return $stmt->fetchAll();
+
+
+//  // Second working solution using doctrine hydrate
+    $query = 'Select a.*, i.id as image_id, i.file_path
+    From project_album as a
+    Left JOIN
+    (
+      Select i.*
+      From project_image as i
+      Where (
+        Select COUNT(*)
+        From project_image as i1
+        Where i1.id <= i.id AND i1.album_id = i.album_id
+      )
+      <= (?)
+    ) as i ON a.id = i.album_id
+    WHERE a.id = (?)';
+
+    $em = $this->getEntityManager();
+    $rsm = new ResultSetMappingBuilder($em);
+
+//  // Another solution
+//  $rsm->addEntityResult('AppBundle:Album', 'a');
+//  $rsm->addJoinedEntityResult('AppBundle:Image', 'i', 'a', 'images');
+
+    // it is working
+    $rsm->addRootEntityFromClassMetadata('AppBundle:Album', 'a');
+    $rsm->addJoinedEntityFromClassMetadata('AppBundle:Image', 'i', 'a', 'images', array(
+        'id' => 'image_id',
+        'created_at' => 'image_created_at',
+        'updated_at' => 'image_updated_at',
+    ));
+
+    $queryManager = $this->_em->createNativeQuery($query, $rsm);
+    $queryManager->setParameter(1, (int)$maxImages);
+    $queryManager->setParameter(2, (int)$id);
+
+    return $queryManager->getResult();
+
+
+// Create data:
+
+// 1000 items - 26 seconds - 18mb
+// 10000 items - ~ seconds - ~ mb
+// $this->variant1($em);
+
+// 1000 items - 1.1 seconds - 15mb
+// 10000 items - 15 seconds - 38mb
+// $this->variant3($em);
+
+// 1000 items - 1 seconds - 19mb
+// 10000 items - 15 seconds - 81mb
+// $this->variant4($em);
+
+protected function variant1($em)
+{
+    for($i = 0; $i < $this->countItems; $i++) {
+        $record = new Boat();
+        $record->setTitle(Rand::generate(25));
+        $record->setDescription(Rand::generate(1000));
+
+        $em->persist($record);
+        $em->flush($record);
+    }
+    $em->clear();
+}
+
+protected function variant3($em)
+{
+    $batchSize = 30;
+
+    for($i = 0; $i < $this->countItems; $i++) {
+        $record = new Boat();
+        $record->setTitle(Rand::generate(25));
+        $record->setDescription(Rand::generate(1000));
+
+        $em->persist($record);
+
+        // flush everything to the database every 20 inserts
+        if (($i % $batchSize) === 0) {
+            $em->flush();
+            $em->clear();
+        }
+    }
+
+    $em->flush();
+    $em->clear();
+}
+
+protected function variant4($em)
+{
+    $em->getConnection()->beginTransaction();
+
+    try {
+        for ($i = 0; $i < $this->countItems; $i++) {
+            $record = new Boat();
+            $record->setTitle(Rand::generate(25));
+            $record->setDescription(Rand::generate(1000));
+
+            $em->persist($record);
+        }
+
+        $em->flush();
+        $em->getConnection()->commit();
+    }
+    catch(\Exception $e)
+    {
+        $em->getConnection()->rollback();
+    }
+
+    $em->clear();
+}
+
+
+// Doctrine query exmamples:
+
+// Example 1
+$role = "ROLE_USER";
+$qb = $repository->createQueryBuilder('u');
+// the function returns a QueryBuilder object
+$result = $qb
+    ->orderBy('u.lastname', 'ASC')
+    ->join('u.groups', 'g')
+    ->groupBy('u.id')
+    ->where('g.roles LIKE :roles')
+    ->setParameter('roles', '%"' . $role . '"%');
+;
+return $result;
+
+// Example 2. How to use `partial` select
+$query
+    ->addSelect('orders')
+    ->leftJoin(sprintf('%s.orders', $query->getRootAlias()), 'orders')
+    ->addSelect('partial g.{id, role }')
+    ->leftJoin(sprintf('%s.groups', $query->getRootAlias()), 'g')
+;
+
+// Example 3. Doctrine expressions
+$query
+    ->andWhere($query->expr()->eq('clients.order',' :orderId'))
+    ->setParameter('orderId', $order->getId())
+;
+
+// Example 4. Left join with multiple orderby
+$query
+    ->leftJoin('a.appVersions', 'av')
+    ->addSelect('av')
+    ->orderBy('av.versionMain', 'DESC')
+    ->addOrderBy('av.versionMinor', 'DESC')
+    ->addOrderBy('av.versionBuild', 'DESC')
+    ->addOrderBy('av.id', 'DESC')
+;
+
+// Example 5. Using mysql function
+$query
+    ->andWhere('UPPER(v.appName) = :appName')
+    ->setParameter('appName', strtoupper($appName))
+;
+
+// Example 6. Work with array
+$query
+    ->andWhere("v.name IN(:names)")
+    ->setParameter('names', array_values($names))
+;
+
+// Example 7. Compare datetime objects
+$query
+    ->andWhere('v.dateUsage >= :dateFrom')
+    ->setParameter('dateFrom', $dateStart)
+    ->andWhere('v.createdAt <= :dateCreated')
+    ->setParameter('dateCreated', $dateCreated)
+;
+
+// Example 8. Doctrine expressions
+ $query
+    ->andWhere(
+        $query->expr()->orX(
+            $query->expr()->isNull('t.start'),
+            $query->expr()->isNull('t.end')
+        )
+    )
+;
+
+// Example 9. Doctrine expressions
+$query
+    ->andWhere(
+        $query->expr()->orX(
+            $query->expr()->neq('v.filter', $filter),
+            $query->expr()->isNull('v.filter')
+        )
+    )
+;
+// ->where($qb->expr()->orX(
+//    $qb->expr()->eq('u.id', '?1'),
+//    $qb->expr()->like('u.nickname', '?2')
+// ))
+
+// Example 10. Using MaxResults and FirstResult (limit and ofset mysql equivalent)
+return $this->getEntityManager()
+        ->createQuery('...')
+        ->setMaxResults(5)
+        ->setFirstResult(10)
+        ->getResult();
+
+// Example 11. Simple queries
+$query = $this->createQueryBuilder()
+              ->from('foo', 'f')
+              ->where('foo.bar = :id')
+              ->setParameter('id', $myID)
+              ->getQuery();
+
+$total = $query->select('COUNT(f)')
+               ->getQuery()
+               ->getSingleScalarResult();
+
+$query = $this->createQueryBuilder()
+    ->select('COUNT(f.id)')
+    ->from('foo', 'f')
+    ->where('foo.bar = :id')
+    ->setParameter('id', $myID)
+    ->getQuery();
+
+$total = $query->getSingleScalarResult();
+
+// Example 12. Complex queries
+$qb = $this->em->createQueryBuilder();
+$q = $qb->update('models\User', 'u')
+        ->set('u.username', $qb->expr()->literal($username))
+        ->set('u.email', $qb->expr()->literal($email))
+        ->where('u.id = ?1')
+        ->setParameter(1, $editId)
+        ->getQuery();
+$p = $q->execute();
+
+Either that or make all your values parameters:
+$qb = $this->em->createQueryBuilder();
+$q = $qb->update('models\User', 'u')
+        ->set('u.username', '?1')
+        ->set('u.email', '?2')
+        ->where('u.id = ?3')
+        ->setParameter(1, $username)
+        ->setParameter(2, $email)
+        ->setParameter(3, $editId)
+        ->getQuery();
+$p = $q->execute();
+
+// alternative way to pass parameters
+$qb = $this->createQueryBuilder('t');
+$q = $qb->update()
+    ->set('t.distance', ':distance')
+    ->setParameter('distance', $distance)
+    ->andWhere('t.id = :id')
+    ->setParameter('id', $id)
+;
+$p = $q->getQuery()->execute();
