@@ -10,6 +10,8 @@ php composer.phar self-update
 
 3. Update project using composer:
 php composer.phar update
+update with dependencies
+php composer.phar update --with-all-dependencies
 
 4. Install some package and add it to composer.json:
 # --dev - this option allow to save package in 'require-dev' item in composer.json
@@ -32,3 +34,13 @@ Available options (in order of stability) are dev, alpha, beta, RC, and stable.
 
 Example:
 Add "minimum-stability" : "dev" to composer.json.
+
+8. Install symfony project
+composer create-project symfony/framework-standard-edition my_project_name "3.4.*"
+
+For symfony 4.4
+# run this if you are building a traditional web application
+composer create-project symfony/website-skeleton my_project_name
+
+# run this if you are building a microservice, console application or API
+composer create-project symfony/skeleton my_project_name
