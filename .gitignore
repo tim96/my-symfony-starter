@@ -46,7 +46,6 @@
 
 # Backup entities generated with doctrine:generate:entities command
 */Entity/*~
-composer.lock
 .idea/
 node_modules/
 bower_components/
