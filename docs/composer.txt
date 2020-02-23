@@ -21,6 +21,8 @@ php composer.phar dump-autoload --optimize
 6. If you want to install a lot of plugins, sometimes you will have a memory error.
 # Run composer with unlimited memory limit:
 php -d memory_limit=-1 composer.phar update
+or you can setting the env parameter
+COMPOSER_MEMORY_LIMIT=-1
 
 7. minimum-stability option:
 This defines the default behavior for filtering packages by stability. This defaults to stable, so if you rely on a
