@@ -38,9 +38,13 @@ Add "minimum-stability" : "dev" to composer.json.
 8. Install symfony project
 composer create-project symfony/framework-standard-edition my_project_name "3.4.*"
 
-For symfony 4.4
+For symfony 4
+composer create-project symfony/website-skeleton my_project_name "4.4.*"
+or
+composer create-project symfony/skeleton my_project_name "4.4.*"
+
+For symfony 5
 # run this if you are building a traditional web application
 composer create-project symfony/website-skeleton my_project_name
-
 # run this if you are building a microservice, console application or API
 composer create-project symfony/skeleton my_project_name
