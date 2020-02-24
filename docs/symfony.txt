@@ -44,3 +44,40 @@ composer update
 php app/console security:check
 // or
 php bin/console security:check
+
+7. Check information about project. For symfony >= 4
+php bin/console about
+
+Output example:
+ -------------------- ----------------------------------------------------------------
+  Symfony
+ -------------------- ----------------------------------------------------------------
+  Version              4.4.4
+  Long-Term Support    Yes
+  End of maintenance   11/2022
+  End of life          11/2023
+ -------------------- ----------------------------------------------------------------
+  Kernel
+ -------------------- ----------------------------------------------------------------
+  Type                 App\Kernel
+  Environment          dev
+  Debug                true
+  Charset              UTF-8
+  Cache directory      ./var/cache/dev (5.9 MiB)
+  Log directory        ./var/log (5 KiB)
+ -------------------- ----------------------------------------------------------------
+  PHP
+ -------------------- ----------------------------------------------------------------
+  Version              7.3.15
+  Architecture         64 bits
+  Intl locale          en_US_POSIX
+  Timezone             UTC (2020-02-24T09:46:31+00:00)
+  OPcache              true
+  APCu                 true
+  Xdebug               false
+ -------------------- ----------------------------------------------------------------
+  Environment (.env)
+ -------------------- ----------------------------------------------------------------
+  APP_ENV              dev
+
+
