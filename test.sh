@@ -3,6 +3,10 @@
 # running phpstan
 ./vendor/bin/phpstan analyse -l 7 -c phpstan.neon config src public
 
+# running phpunit
+# https://phpunit.readthedocs.io/en/9.0/textui.html#command-line-options
+./vendor/bin/phpunit tests
+
 # running phpcs
 ./vendor/bin/phpcs --standard=PSR2 --ignore=src/Migrations/*,config/bootstrap.php config src
 

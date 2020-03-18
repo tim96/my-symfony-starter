@@ -48,6 +48,7 @@
         "squizlabs/php_codesniffer": "@stable",
         "symfony/debug-pack": "@stable",
         "symfony/maker-bundle": "@stable",
+        "symfony/panther": "^0.7.1",
         "symfony/profiler-pack": "@stable",
         "symfony/test-pack": "@stable"
     },
