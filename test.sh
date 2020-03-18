@@ -18,3 +18,6 @@
 # There src - code folder for scan, xml - format, cleancode - ruleset
 # Available formats: ansi, html, json, text, xml.
 # Available rulesets: cleancode, codesize, controversial, design, naming, unusedcode.
+
+# Generate fixtures
+# ./bin/console hautelook:fixtures:load
