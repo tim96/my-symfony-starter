@@ -43,6 +43,7 @@
         "mockery/mockery": "@stable",
         "phpstan/phpstan": "@stable",
         "phpunit/phpunit": "@stable",
+        "squizlabs/php_codesniffer": "@stable",
         "symfony/debug-pack": "@stable",
         "symfony/maker-bundle": "@stable",
         "symfony/profiler-pack": "@stable",
