@@ -9,3 +9,6 @@
 # running doctrine commands
 # ./bin/console doctrine:migrations:status
 # ./bin/console doctrine:schema:validate
+
+# running phpmetrics report
+# ./vendor/bin/phpmetrics --report-html=myreport .
