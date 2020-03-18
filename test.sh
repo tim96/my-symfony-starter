@@ -12,3 +12,9 @@
 
 # running phpmetrics report
 # ./vendor/bin/phpmetrics --report-html=myreport .
+
+# running phpmd report
+# ./vendor/bin/phpmd src xml cleandcode
+# There src - code folder for scan, xml - format, cleancode - ruleset
+# Available formats: ansi, html, json, text, xml.
+# Available rulesets: cleancode, codesize, controversial, design, naming, unusedcode.

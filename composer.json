@@ -41,6 +41,7 @@
         "doctrine/doctrine-fixtures-bundle": "@stable",
         "hautelook/alice-bundle": "@stable",
         "mockery/mockery": "@stable",
+        "phpmd/phpmd": "@stable",
         "phpmetrics/phpmetrics": "^2.5",
         "phpstan/phpstan": "@stable",
         "phpunit/phpunit": "@stable",
